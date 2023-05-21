@@ -9,6 +9,7 @@ import { MidjourneyMessage } from "./midjourney.message";
 import { CreateQueue } from "./queue";
 import { random, sleep } from "./utls";
 import { WsMessage } from "./ws.message";
+import fetch from "node-fetch"
 export class Midjourney extends MidjourneyMessage {
   private ApiQueue = CreateQueue(1);
   public config: MidjourneyConfig;
