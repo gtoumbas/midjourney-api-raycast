@@ -9,7 +9,7 @@ import { MidjourneyMessage } from "./midjourney.message";
 import { CreateQueue } from "./queue";
 import { random, sleep } from "./utls";
 import { WsMessage } from "./ws.message";
-import fetch from "node-fetch"
+import axios from "axios";
 export class Midjourney extends MidjourneyMessage {
   private ApiQueue = CreateQueue(1);
   public config: MidjourneyConfig;
@@ -77,11 +77,11 @@ export class Midjourney extends MidjourneyMessage {
         "Content-Type": "application/json",
         Authorization: this.config.SalaiToken,
       };
-      const response = await fetch("https://discord.com/api/v9/interactions", {
-        method: "POST",
-        body: JSON.stringify(payload),
-        headers: headers,
-      });
+      const response = await axios.post(
+        "https://discord.com/api/v9/interactions",
+        payload,
+        { headers }
+      );
       callback && callback(response.status);
       //discord api rate limit
       await sleep(950);
